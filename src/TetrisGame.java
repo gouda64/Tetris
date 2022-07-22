@@ -69,14 +69,14 @@ public class TetrisGame extends JFrame implements ActionListener
             this.setLayout(new FlowLayout());
             this.setSize(315, 290);
 
-            this.getContentPane().add(new JLabel("This is the classic game Tetris."));
+            this.getContentPane().add(new JLabel("This is a bad replication of classic game Tetris."));
             this.getContentPane().add(new JLabel("Different shaped blocks will fall from the sky."));
             this.getContentPane().add(new JLabel("You can clear lines by filling them up with blocks."));
             this.getContentPane().add(new JLabel("If the blocks stack up to the ceiling, you lose!"));
             this.getContentPane().add(new JLabel("Use the arrow keys to move your block, and"));
             this.getContentPane().add(new JLabel("the down arrow to descend faster."));
-            this.getContentPane().add(new JLabel("Press the space bar to rotate your block, "));
-            this.getContentPane().add(new JLabel("and press 'z' to land immediately."));
+            this.getContentPane().add(new JLabel("Press 'z' or the up arrow to rotate your block, "));
+            this.getContentPane().add(new JLabel("and press the space bar to land immediately."));
             this.getContentPane().add(new JLabel("Also, press 'p' to pause (but don't try to cheat!)"));
 
             JButton back = new JButton("Back");
@@ -105,8 +105,8 @@ public class TetrisGame extends JFrame implements ActionListener
             this.setLayout(new FlowLayout());
             this.setSize(315, 225);
 
-            this.getContentPane().add(new JLabel("Game concept and mechanics (and...pretty much"));
-            this.getContentPane().add(new JLabel("everything) by Alexey Pajitnov."));
+            this.getContentPane().add(new JLabel("Game concept and mechanics and stuff"));
+            this.getContentPane().add(new JLabel("by Alexey Pajitnov and the Tetris company"));
             this.getContentPane().add(new JLabel("(Obnoxious, as I've been told) sounds"));
             this.getContentPane().add(new JLabel("by Zapsplat and Fesliyan Studios."));
             this.getContentPane().add(new JLabel("NO credits for me because I made this"));

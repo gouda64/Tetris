@@ -9,24 +9,26 @@ public class TetrisPanel extends JPanel implements ActionListener
     static final int UNIT_SIZE = 30;
     static final int SCREEN_WIDTH = 10*UNIT_SIZE;
     static final int SCREEN_HEIGHT = 20*UNIT_SIZE;
-    static final int DELAY = 50;
+    static final int DELAY = 2; //in milliseconds
     static final String CLICK = "./stuff/click.wav";
     static final String SWOOSH = "./stuff/swoosh.wav";
     static final String THUMP = "./stuff/thump.wav";
-    private int down = 10;
+    private int down = 40;
     private boolean downPressed = false;
     private int downDelayDummy = 0;
+    private int softDropDummy = 0;
     private int[] blockX = new int[4];
     private int[] blockY = new int[4];
     private int[] projX = new int[4];
     private int[] projY = new int[4];
-    private int block;
+    int block;
+    int nextBlock = (int) (Math.random()*7);
     int linesCleared = 0;
     int score = 0;
     int highScore = 0;
     int level = 0;
     private int levelLines = 0;
-    private boolean[][] rows = new boolean[22][12];
+    private boolean[][] rows = new boolean[23][12];
     private JPanel end = new JPanel();
     private JLabel congrats = new JLabel();
     private JLabel congrats2 = new JLabel();
@@ -123,7 +125,8 @@ public class TetrisPanel extends JPanel implements ActionListener
         }
     }
     public void newBlock() {
-        block = (int) (Math.random()*7);
+        block = nextBlock;
+        nextBlock = (int) (Math.random()*7);
         //0: I block, 1: O block, 2: S block, 3: Z block, 4: T block, 5: L block, 6: J block
         //I block cyan, O block yellow, S block green, Z block red, T block purple, L block orange, J block blue
         //first coord is center of rotation
@@ -322,8 +325,8 @@ public class TetrisPanel extends JPanel implements ActionListener
         if (levelLines >= 10) {
             level++;
             levelLines -= 10;
-            if (down > 0) {
-                down--;
+            if (down-3 > 0) {
+                down -= 3;
             }
             downDelayDummy = 0;
         }
@@ -400,8 +403,14 @@ public class TetrisPanel extends JPanel implements ActionListener
         if (running && !paused) {
             if (!checkLanded()) {
                 if (downPressed) {
-                    move();
-                    score++;
+                    if (softDropDummy == Math.min(down/2, 3)) {
+                        move();
+                        softDropDummy = 0;
+                        score++;
+                    }
+                    else {
+                        softDropDummy++;
+                    }
                 }
                 else {
                     if (downDelayDummy == down) {
@@ -424,9 +433,9 @@ public class TetrisPanel extends JPanel implements ActionListener
             linesCleared = 0;
             level = 0;
             levelLines = 0;
-            down = 10;
+            down = 40;
             downDelayDummy = 0;
-            rows = new boolean[22][12];
+            rows = new boolean[23][12];
             this.remove(end);
             running = true;
             newBlock();
@@ -469,10 +478,10 @@ public class TetrisPanel extends JPanel implements ActionListener
                     playSound(CLICK);
                 }
                 else if (s == KeyEvent.VK_Z) {
-                    rotate(false);
+                    rotate(true);
                 }
                 else if (s == KeyEvent.VK_UP) {
-                    rotate(true);
+                    rotate(false);
                 }
                 else if (s == KeyEvent.VK_DOWN) {
                     downPressed = true;
@@ -498,6 +507,7 @@ public class TetrisPanel extends JPanel implements ActionListener
             int s = e.getKeyCode();
             if (s == KeyEvent.VK_DOWN) {
                 downPressed = false;
+                softDropDummy = 0;
             }
         }
     }

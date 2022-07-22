@@ -13,6 +13,8 @@ public class SidePanel extends JPanel implements ActionListener
     private JLabel linesLabel = new JLabel("" + lines);
     private JLabel highScoreLabel = new JLabel("" + highScore);
     private JLabel levelLabel = new JLabel("" + level);
+    private JLabel nextLabel = new JLabel("");
+    private int nextPiece;
     private javax.swing.Timer timer;
 
     public SidePanel(TetrisPanel tetris) {
@@ -20,23 +22,24 @@ public class SidePanel extends JPanel implements ActionListener
         this.setPreferredSize(new Dimension(150, 600));
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        JLabel highText = new JLabel("High score: ");
-        JLabel scoreText = new JLabel("Score: ");
-        JLabel lineText = new JLabel("Lines cleared: ");
-        JLabel levelText = new JLabel("Level: ");
-        this.add(highText);
+        this.add(new JLabel("High score: "));
         this.add(highScoreLabel);
-        this.add(levelText);
+        this.add(new JLabel("Level: "));
         this.add(levelLabel);
-        this.add(scoreText);
+        this.add(new JLabel("Score: "));
         this.add(scoreLabel);
-        this.add(lineText);
+        this.add(new JLabel("Lines cleared: "));
         this.add(linesLabel);
+        this.add(new JLabel(" "));
+        this.add(new JLabel("Next piece:"));
+        this.add(new JLabel(" "));
+        this.add(nextLabel);
+
         start();
     }
 
     public void start() {
-        timer = new javax.swing.Timer(50, this);
+        timer = new javax.swing.Timer(2, this);
         timer.start();
     }
 
@@ -57,6 +60,13 @@ public class SidePanel extends JPanel implements ActionListener
         if (tetris.level != level) {
             level = tetris.level;
             levelLabel.setText("" + level);
+        }
+        if (tetris.nextBlock != nextPiece) {
+            nextPiece = tetris.nextBlock;
+            ImageIcon img = new ImageIcon("./stuff/block" + nextPiece + ".png");
+            Image rzImg = img.getImage().getScaledInstance((int) (img.getIconWidth()*2.0/3), (int) (img.getIconHeight()*2.0/3), Image.SCALE_SMOOTH);
+
+            nextLabel.setIcon(new ImageIcon(rzImg));
         }
     }
 }
