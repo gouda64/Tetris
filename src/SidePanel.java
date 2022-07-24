@@ -1,10 +1,11 @@
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SidePanel extends JPanel implements ActionListener
 {
-    private TetrisPanel tetris;
+    private Tetris tetris;
     private int score = 0;
     private int lines = 0;
     private int highScore = 0;
@@ -15,9 +16,9 @@ public class SidePanel extends JPanel implements ActionListener
     private JLabel levelLabel = new JLabel("" + level);
     private JLabel nextLabel = new JLabel("");
     private int nextPiece;
-    private javax.swing.Timer timer;
+    private Timer timer;
 
-    public SidePanel(TetrisPanel tetris) {
+    public SidePanel(Tetris tetris) {
         this.tetris = tetris;
         this.setPreferredSize(new Dimension(150, 600));
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -39,7 +40,7 @@ public class SidePanel extends JPanel implements ActionListener
     }
 
     public void start() {
-        timer = new javax.swing.Timer(2, this);
+        timer = new Timer(2, this);
         timer.start();
     }
 

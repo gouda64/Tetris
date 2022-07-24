@@ -9,7 +9,7 @@ public class TetrisGame extends JFrame implements ActionListener
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setLayout(null);
-        this.setSize(450, 380);
+        this.setSize(450, 440);
 
         JLabel logo = new JLabel(new ImageIcon("./stuff/bad tetris.png"));
         logo.setBounds(0, 0, 450, 175);
@@ -21,16 +21,22 @@ public class TetrisGame extends JFrame implements ActionListener
         start.setBounds(125, 175, 200, 50);
         this.getContentPane().add(start);
 
+        JButton bots = new JButton("Bot");
+        bots.setActionCommand("Bot");
+        bots.addActionListener(this);
+        bots.setBounds(125, 230, 200, 50);
+        this.getContentPane().add(bots);
+
         JButton info = new JButton("How To");
         info.setActionCommand("How To");
         info.addActionListener(this);
-        info.setBounds(125, 230, 200, 50);
+        info.setBounds(125, 285, 200, 50);
         this.getContentPane().add(info);
 
         JButton creds = new JButton("Credits");
         creds.setActionCommand("Credits");
         creds.addActionListener(this);
-        creds.setBounds(125, 285, 200, 50);
+        creds.setBounds(125, 340, 200, 50);
         this.getContentPane().add(creds);
 
         this.setLocationRelativeTo(null);
@@ -47,6 +53,10 @@ public class TetrisGame extends JFrame implements ActionListener
 
         switch (c) {
             case "Start" -> {
+                new TetrisFrame();
+                this.dispose();
+            }
+            case "Bot" -> {
                 new TetrisFrame();
                 this.dispose();
             }

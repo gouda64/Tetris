@@ -11,7 +11,7 @@ public class TetrisFrame extends JFrame
 
         TetrisPanel tetris = new TetrisPanel();
         this.add(tetris);
-        this.add(new SidePanel(tetris));
+        this.add(new SidePanel(tetris.tetris));
 
         this.pack();
         this.setLocationRelativeTo(null);
